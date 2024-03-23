@@ -47,7 +47,9 @@ public class MainActivity extends AppCompatActivity implements ImageAnalysis.Ana
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
 
     PreviewView previewView;
+    RectangleOverlayView rectangleOverlayView;
     private ImageCapture imageCapture;
+    @SuppressLint("RestrictedApi")
     private VideoCapture videoCapture;
     private Button bRecord;
     private Button bCapture;
@@ -61,7 +63,16 @@ public class MainActivity extends AppCompatActivity implements ImageAnalysis.Ana
         bCapture = findViewById(R.id.bCapture);
         bRecord = findViewById(R.id.bRecord);
         bRecord.setText("start recording"); // Set the initial text of the button
-        
+
+        rectangleOverlayView = findViewById(R.id.rectangleOverlayView);
+        float leftPercentile = 0.25f; // 25% of the screen width
+        float topPercentile = 0.5f; // 25% of the screen height
+        float rightPercentile = 0.25f; // 75% of the screen width
+        float bottomPercentile = 0.5f; // 75% of the screen height
+
+        rectangleOverlayView.updateRectPosition(leftPercentile, topPercentile, rightPercentile, bottomPercentile);
+
+
         bCapture.setOnClickListener(this);
         bRecord.setOnClickListener(this);
 
@@ -127,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements ImageAnalysis.Ana
                 capturePhoto();
                 break;
             case R.id.bRecord:
-                if (bRecord.getText() == "start recording"){
+                if (bRecord.getText() == "start recording") {
                     bRecord.setText("stop recording");
                     recordVideo();
                 } else {
@@ -192,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements ImageAnalysis.Ana
         ContentValues contentValues = new ContentValues();
         contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, timestamp);
         contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
-
 
 
         imageCapture.takePicture(

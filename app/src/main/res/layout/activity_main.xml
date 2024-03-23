@@ -6,48 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:weightSum="100"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonsLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.palfs.cameraxinjava.RectangleOverlayView
+        android:id="@+id/rectangleOverlayView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/buttonsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.camera.view.PreviewView
-            android:id="@+id/previewView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="90" />
+        <Button
+            android:id="@+id/bCapture"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Take Picture" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:layout_weight="10"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <Button
-                android:id="@+id/bCapture"
-                android:layout_marginStart="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="take picture" />
-
-            <Button
-                android:id="@+id/bRecord"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:text="start recording" />
-        </RelativeLayout>
+        <Button
+            android:id="@+id/bRecord"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Start Recording" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
